@@ -39,3 +39,5 @@ class CitiesIterator:
                 population=city_data["population"],
                 subject=city_data["subject"]
             )
+    def set_population_filter(self, min_population: int):
+        self.min_population = min_population
