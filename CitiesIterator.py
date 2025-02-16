@@ -18,3 +18,14 @@ class CitiesIterator:
         if sort_by is not None:
             self.sort_by(sort_by, reverse)
         self.min_population = 0  
+
+    def _validate_data(self):
+        """Проверка наличия всех необходимых полей в данных."""
+        required_fields = {"name", "district", "population", "subject", "coords"}
+        coords_fields = {"lat", "lon"}
+
+        for city_data in self.cities_data:
+            if not required_fields.issubset(city_data.keys()):
+                raise ValueError(f"Отсутствуют обязательные поля в данных: {city_data}")
+            if not coords_fields.issubset(city_data["coords"].keys()):
+                raise ValueError(f"Отсутствуют обязательные поля в 'coords': {city_data}")
