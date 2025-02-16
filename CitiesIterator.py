@@ -80,14 +80,22 @@ class CitiesIterator:
         raise StopIteration
     
 if __name__ == "__main__":
-    cities_data = 
+    
+    json_file_path = "cities.json"
 
-    # Создаем итератор
-    cities_iterator = CitiesIterator(cities_data, sort_by="population", reverse=True)
+    try:
+        # Загрузка данных из JSON
+        cities_data = load_cities_from_json(json_file_path)
 
-    # Устанавливаем фильтр по населению
-    cities_iterator.set_population_filter(min_population=1000000)
+        # Создание итератора городов
+        cities_iterator = CitiesIterator(cities_data, sort_by="population", reverse=True)
 
-    # Итерация по городам
-    for city in cities_iterator:
-        print(f"{city.name} ({city.population})")
+        # Установка фильтра по населению
+        cities_iterator.set_population_filter(min_population=10000)
+
+        # Итерация по городам
+        for city in cities_iterator:
+            print(f"{city.name} ({city.population})")
+
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Ошибка: {e}")
