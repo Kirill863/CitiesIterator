@@ -8,3 +8,6 @@ class City:
     district: str
     population: int
     subject: str
+
+class CitiesIterator:
+    
