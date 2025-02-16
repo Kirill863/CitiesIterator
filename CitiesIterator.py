@@ -1,5 +1,19 @@
+import json
 from dataclasses import dataclass
+from typing import List, Dict
+from pathlib import Path
 
+def load_cities_from_json(file_path: str) -> list:
+    if not Path(file_path).is_file():
+        raise FileNotFoundError(f"Файл {file_path} не найден.")
+
+    with open(file_path, 'r', encoding='utf-8') as file:
+        try:
+            cities_data = json.load(file)
+            return cities_data
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Ошибка при декодировании JSON: {e}")
+        
 @dataclass
 class City:
     name: str
@@ -64,3 +78,16 @@ class CitiesIterator:
             if city.population >= self.min_population:
                 return city
         raise StopIteration
+    
+if __name__ == "__main__":
+    cities_data = 
+
+    # Создаем итератор
+    cities_iterator = CitiesIterator(cities_data, sort_by="population", reverse=True)
+
+    # Устанавливаем фильтр по населению
+    cities_iterator.set_population_filter(min_population=1000000)
+
+    # Итерация по городам
+    for city in cities_iterator:
+        print(f"{city.name} ({city.population})")
