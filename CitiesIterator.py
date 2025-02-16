@@ -29,3 +29,13 @@ class CitiesIterator:
                 raise ValueError(f"Отсутствуют обязательные поля в данных: {city_data}")
             if not coords_fields.issubset(city_data["coords"].keys()):
                 raise ValueError(f"Отсутствуют обязательные поля в 'coords': {city_data}")
+    
+    def _create_city(self, city_data: Dict) -> City:
+            return City(
+                name=city_data["name"],
+                lat=city_data["coords"]["lat"],
+                lon=city_data["coords"]["lon"],
+                district=city_data["district"],
+                population=city_data["population"],
+                subject=city_data["subject"]
+            )
