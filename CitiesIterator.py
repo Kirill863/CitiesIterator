@@ -44,3 +44,8 @@ class CitiesIterator:
             raise ValueError(f"Ошибка при создании города: отсутствует ключ {e}")
     def set_population_filter(self, min_population: int):
         self.min_population = min_population
+
+    def sort_by(self, parameter: str, reverse: bool = False):
+        if not hasattr(self.cities[0], parameter):
+            raise ValueError(f"Невозможно отсортировать по несуществующему параметру: {parameter}")
+        self.cities.sort(key=lambda city: getattr(city, parameter), reverse=reverse)
