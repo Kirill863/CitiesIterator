@@ -49,6 +49,12 @@ class CitiesIterator:
         if not hasattr(self.cities[0], parameter):
             raise ValueError(f"Невозможно отсортировать по несуществующему параметру: {parameter}")
         self.cities.sort(key=lambda city: getattr(city, parameter), reverse=reverse)
+    
+    def __iter__(self):
+        
+        self.index = 0
+        return self
+
 
     def __next__(self):
 
