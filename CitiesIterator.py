@@ -31,6 +31,7 @@ class CitiesIterator:
                 raise ValueError(f"Отсутствуют обязательные поля в 'coords': {city_data}")
     
     def _create_city(self, city_data: Dict) -> City:
+        try:    
             return City(
                 name=city_data["name"],
                 lat=city_data["coords"]["lat"],
@@ -39,5 +40,7 @@ class CitiesIterator:
                 population=city_data["population"],
                 subject=city_data["subject"]
             )
+        except KeyError as e:
+            raise ValueError(f"Ошибка при создании города: отсутствует ключ {e}")
     def set_population_filter(self, min_population: int):
         self.min_population = min_population
